@@ -10,6 +10,8 @@ from tkinter import filedialog
 import tkinter
 import glob
 import configparser
+import os
+import sys
 
 class setFiles(tkinter.Frame):
     #iniファイルの読み込みと下準備
@@ -70,11 +72,19 @@ class setFiles(tkinter.Frame):
         return self.fileList
     def spDir(self):
         for i in self.spConDirs:
-            self.fileList.extend(sorted(glob.glob(i + '/*')))
+            if os.path.exists(i):
+                self.fileList.extend(sorted(glob.glob(i + '/*')))
+            else:
+                print('!!ERROR!!' + i +' is not exist. Please check spDirs of setFiles_config_ini')
+                sys.exit(1)
         return self.fileList
     def spFiles(self):
         for i in self.spConFiles:
-            self.fileList.append(i)
+            if os.path.exists(i):
+                self.fileList.append(i)
+            else:
+                print('!!ERROR!!' + i +' is not exist. Please check spFiles of setFiles_config_ini')
+                sys.exit(1)
         return self.fileList
 
 if __name__ == '__main__':
