@@ -65,7 +65,7 @@ class setFiles(tkinter.Frame):
 
     def getDir(self):
         self.dirName = filedialog.askdirectory(initialdir = self.preDir)
-        self.fileList.append(sorted(glob.glob(self.dirName + '/*')))
+        self.fileList = sorted(glob.glob(self.dirName + '/*'))
         return self.fileList
     def getFiles(self):
         self.fileList.append(filedialog.askopenfilenames(filetypes = self.tp , initialdir = self.preDir ))
